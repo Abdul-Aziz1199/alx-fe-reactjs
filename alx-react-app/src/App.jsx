@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 import WelcomeMessage from "./components/WelcomeMessage";
 
+=======
+>>>>>>> b7f592757f00876b89635dfc842f6b8ce95e017c
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
@@ -30,8 +33,11 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+<<<<<<< HEAD
 
       <WelcomeMessage />
+=======
+>>>>>>> b7f592757f00876b89635dfc842f6b8ce95e017c
     </>
   )
 }
