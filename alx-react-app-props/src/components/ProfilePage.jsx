@@ -1,4 +1,4 @@
-//to no longer take prop
+//to no longer  take userdata as prop
 import React from "react";
 import UserInfo from "./components/UserInfo";
 

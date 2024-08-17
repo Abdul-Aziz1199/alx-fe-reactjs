@@ -1,7 +1,7 @@
-
+//update App.jsx to use UserProvider and pass userData as the context value;
 import React from 'react';
 import ProfilePage from "./components/ProfilePage";
-import { UserProvider } from "./components/UserContext";
+import { UserProvider } from "./UserContext";
 
 function App() {
   
