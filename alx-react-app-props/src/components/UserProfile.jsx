@@ -1,13 +1,18 @@
-function UserProfile(props) {
-    return(
-    <div>
-        <h2>{props.name}</h2>
+import { useContext } from 'react';
+import UserContext from './UserContext'
 
-        <p>Age: {props.age}</p>
+function UserProfile() {
+    const userData = useContext(UserContext);    //to consume context
 
-        <p>Bio: {props.bio}</p>
-    </div>
+           if(!userData){
+            return <div>No user data available</div>
+           }
+           return(
+            <div>
+                <p>Name: {userData.name}</p>
+                <p>Email: {userData.email}</p>
+            </div>
 
-    )
+           )
 }
 export default UserProfile;
