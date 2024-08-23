@@ -30,3 +30,4 @@ const AddRecipeForm = () => {
     </form>
   );
 };
+export default AddRecipeForm;
