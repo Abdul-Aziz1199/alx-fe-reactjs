@@ -1,6 +1,6 @@
 import { useRecipeStore } from './recipeStore';
 
-const recipeList = () => {
+const RecipeList = () => {
     const recipes = useRecipeStore(state => state.recipes);
     return (
         <div>
@@ -14,5 +14,5 @@ const recipeList = () => {
         </div>
     )
 };
-export default recipeList;
+export default RecipeList;
 
