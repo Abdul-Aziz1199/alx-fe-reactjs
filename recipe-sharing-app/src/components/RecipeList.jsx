@@ -1,18 +1,25 @@
-import React from 'react';
-import { useRecipeStore } from './recipeStore';
+import React, { useEffect } from 'react';
+import useRecipeStore from './recipeStore';
+import Recipe from './Recipe'; // Import the Recipe component
 
+// Component to display the list of recipes
 const RecipeList = () => {
-  const recipes = useRecipeStore((state) => state.recipes);
+  const recipes = useRecipeStore(state => state.filteredRecipes);
+  const filterRecipes = useRecipeStore(state => state.filterRecipes);
+
+  useEffect(() => {
+    filterRecipes(); // Filter recipes when the component mounts or search term changes
+  }, [filterRecipes]);
 
   return (
     <div>
-      <h2>Recipe List</h2>
-      {recipes.map((recipe) => (
-        <div key={recipe.id}>
-          <h3>{recipe.title}</h3>
-          <p>{recipe.description}</p>
-        </div>
-      ))}
+      {recipes.length > 0 ? (
+        recipes.map(recipe => (
+          <Recipe key={recipe.id} recipe={recipe} /> // Use Recipe component to display each recipe
+        ))
+      ) : (
+        <p>No recipes found</p> // Message when no recipes match the search term
+      )}
     </div>
   );
 };
