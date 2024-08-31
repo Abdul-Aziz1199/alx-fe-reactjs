@@ -1,5 +1,9 @@
-import ProtectedRoute from './components/ProtectedRoute';
-import Profile from './components/profile';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/Home';
+import Profile from './components/Profile';
+import BlogPost from './components/BlogPost';
+import NotFound from './components/NotFound';
+
 function App() {
   const isAuthenticated = false; // Replace with actual authentication logic
 
