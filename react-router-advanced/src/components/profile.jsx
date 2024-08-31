@@ -1,7 +1,7 @@
 //nested routes for sub sections like profileDetails and profileSettings
 import { Routes, Route, Link } from 'react-router-dom';
-import ProfileDetails from './components/ProfileDetails'; // Corrected path
-import ProfileSettings from './components/ProfileSettings'; // Corrected path
+import ProfileDetails from './components/ProfileDetails'; 
+import ProfileSettings from './components/ProfileSettings'; 
 
 function Profile() {
   return (
