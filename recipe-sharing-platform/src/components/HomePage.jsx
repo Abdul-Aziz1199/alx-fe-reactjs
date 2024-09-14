@@ -10,7 +10,7 @@ const HomePage = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {recipes.map(recipe => (
           <div key={recipe.id} className="bg-white p-4 rounded shadow hover:shadow-lg">
             <img src={recipe.image} alt={recipe.title} className="w-full h-48 object-cover rounded" />
@@ -24,3 +24,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
