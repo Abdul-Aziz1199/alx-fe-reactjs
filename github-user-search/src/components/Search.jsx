@@ -1,10 +1,11 @@
 // src/components/Search.jsx
 import React, { useState } from 'react';
-import { fetchAdvancedUserData } from '../services/githubService';  // Updated service function for advanced search
+import { fetchAdvancedUserData } from '../services/githubService';
 
 const Search = () => {
   const [username, setUsername] = useState('');
-  const [location, setLocation] = useState('');  // New state for location
+  const [location, setLocation] = useState('');
+  const [minRepos, setMinRepos] = useState('');  // New state for minRepos
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -17,9 +18,9 @@ const Search = () => {
     setUsers([]);
 
     try {
-      // Pass both username and location to the API call
-      const data = await fetchAdvancedUserData(username, location);  // Adjusted API function
-      setUsers(data.items);  // Assuming the API response has an 'items' field with user results
+      // Pass username, location, and minRepos to the API call
+      const data = await fetchAdvancedUserData(username, location, minRepos);
+      setUsers(data.items);  // Assuming the response has an 'items' field
     } catch (err) {
       setError('Looks like we can’t find the user');
     } finally {
@@ -48,6 +49,15 @@ const Search = () => {
             className="w-full p-2 border border-gray-300 rounded"
           />
         </div>
+        <div>
+          <input
+            type="number"
+            value={minRepos}
+            onChange={(e) => setMinRepos(e.target.value)}
+            placeholder="Minimum repositories"
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
         <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">
           Search
         </button>
@@ -66,7 +76,7 @@ const Search = () => {
             <div key={user.id} className="p-4 border border-gray-200 rounded">
               <img src={user.avatar_url} alt={user.login} className="w-20 h-20 rounded-full mx-auto" />
               <h2 className="text-center text-xl font-semibold mt-2">{user.login}</h2>
-              <p className="text-center">{user.location || 'No location provided'}</p>  {/* Display location if available */}
+              <p className="text-center">{user.location || 'No location provided'}</p>
               <p className="text-center">
                 <a href={user.html_url} target="_blank" rel="noopener noreferrer" className="text-blue-500">
                   View GitHub Profile
