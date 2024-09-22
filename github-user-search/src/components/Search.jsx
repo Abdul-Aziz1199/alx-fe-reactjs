@@ -1,14 +1,15 @@
 // src/components/Search.jsx
 import React, { useState } from 'react';
-import { fetchUserData } from '../services/githubService';  // Assuming the API call is defined in githubService.js
+import { fetchAdvancedUserData } from '../services/githubService';  // Updated service function for advanced search
 
 const Search = () => {
   const [username, setUsername] = useState('');
+  const [location, setLocation] = useState('');  // New state for location
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Async function to handle API request
+  // Async function to handle the API request
   const handleSearch = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -16,9 +17,9 @@ const Search = () => {
     setUsers([]);
 
     try {
-      // Make async API call
-      const data = await fetchUserData(username);  // `await` used here for async function
-      setUsers(data);
+      // Pass both username and location to the API call
+      const data = await fetchAdvancedUserData(username, location);  // Adjusted API function
+      setUsers(data.items);  // Assuming the API response has an 'items' field with user results
     } catch (err) {
       setError('Looks like we can’t find the user');
     } finally {
@@ -35,6 +36,15 @@ const Search = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Enter GitHub username"
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Enter location"
             className="w-full p-2 border border-gray-300 rounded"
           />
         </div>
@@ -56,6 +66,7 @@ const Search = () => {
             <div key={user.id} className="p-4 border border-gray-200 rounded">
               <img src={user.avatar_url} alt={user.login} className="w-20 h-20 rounded-full mx-auto" />
               <h2 className="text-center text-xl font-semibold mt-2">{user.login}</h2>
+              <p className="text-center">{user.location || 'No location provided'}</p>  {/* Display location if available */}
               <p className="text-center">
                 <a href={user.html_url} target="_blank" rel="noopener noreferrer" className="text-blue-500">
                   View GitHub Profile

@@ -1,21 +1,11 @@
 // src/services/githubService.js
 import axios from 'axios';
 
-export const fetchUserData = async ({ username, location, minRepos }) => {
-  try {
-    let query = username ? `user:${username}` : '';
-    
-    if (location) {
-      query += ` location:${location}`;
-    }
-    
-    if (minRepos) {
-      query += ` repos:>=${minRepos}`;
-    }
-    
-    const response = await axios.get(`https://api.github.com/search/users?q=${query}`);
-    return response.data.items; // Array of users
-  } catch (error) {
-    throw new Error('Error fetching data');
-  }
+// Function to fetch GitHub users based on username and location
+export const fetchAdvancedUserData = async (username, location) => {
+  const query = `q=${username}+location:${location}`;  // Construct query with username and location
+  const url = `https://api.github.com/search/users?${query}`;
+  
+  const response = await axios.get(url);
+  return response.data;  // Return API data
 };
