@@ -3,24 +3,45 @@ import React, { useState } from 'react';
 
 const Search = ({ onSearch }) => {
   const [username, setUsername] = useState('');
+  const [location, setLocation] = useState('');
+  const [minRepos, setMinRepos] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (username.trim()) {
-      onSearch(username);
-    }
+    onSearch({ username, location, minRepos });
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter GitHub username"
-        />
-        <button type="submit">Search</button>
+    <div className="max-w-lg mx-auto p-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Enter GitHub username"
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Enter location"
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div>
+          <input
+            type="number"
+            value={minRepos}
+            onChange={(e) => setMinRepos(e.target.value)}
+            placeholder="Minimum repositories"
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">Search</button>
       </form>
     </div>
   );
