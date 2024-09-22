@@ -7,19 +7,20 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Handle form submission and search API call
+  // Handle form submission and API call
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError(null); // Reset error before new search
+    setLoading(true);  // Set loading to true when the search starts
+    setError(null);    // Reset error state
+    setUserData(null); // Clear any existing user data
 
     try {
-      const data = await fetchUserData(searchTerm);
-      setUserData(data);
+      const data = await fetchUserData(searchTerm); // Call the API service
+      setUserData(data); // Store the fetched user data
     } catch (err) {
-      setError('Looks like we can’t find the user');
+      setError('Looks like we can’t find the user'); // Set the error message
     } finally {
-      setLoading(false);
+      setLoading(false); // Stop loading after the API call completes
     }
   };
 
@@ -36,10 +37,10 @@ const Search = () => {
         <button type="submit" className="search-button">Search</button>
       </form>
 
-      {/* Display loading message */}
+      {/* Loading state */}
       {loading && <p>Loading...</p>}
 
-      {/* Display error message if user not found */}
+      {/* Error message when user not found */}
       {error && <p>{error}</p>}
 
       {/* Display user data if found */}
